@@ -6,8 +6,6 @@ class PriorityQueue {
     get length() {
         return this.entries.length;
     }
-    constructor() {
-    }
     push(element, priority) {
         this.entries.push({ element, priority });
         this.entries.sort((a, b) => a.priority - b.priority);

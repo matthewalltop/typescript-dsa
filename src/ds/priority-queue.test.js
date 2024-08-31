@@ -3,14 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const globals_1 = require("@jest/globals");
 const priority_queue_1 = require("./priority-queue");
 (0, globals_1.describe)('PriorityQueue', () => {
-    (0, globals_1.test)('pushes element into queue', () => {
+    (0, globals_1.test)('Pushes element into queue', () => {
         const pq = new priority_queue_1.PriorityQueue();
         pq.push(1, 1);
         const res = JSON.stringify(pq.pop());
         const expected = JSON.stringify({ element: 1, priority: 1 });
         (0, globals_1.expect)(res).toBe(expected);
     });
-    (0, globals_1.test)('removes element from queue', () => {
+    (0, globals_1.test)('Removes element from queue', () => {
         const pq = new priority_queue_1.PriorityQueue();
         pq.push(1, 1);
         pq.push(2, 2);

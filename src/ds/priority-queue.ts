@@ -4,9 +4,6 @@ export class PriorityQueue<T> {
         return this.entries.length;
     }
     
-    constructor() {
-    }
-    
     public push(element: T,  priority: number): void {
         this.entries.push({element, priority});
         this.entries.sort((a, b) => a.priority - b.priority);
