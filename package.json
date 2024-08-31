@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "tsc && jest --config jest.config.ts"
+    "test": "jest --config jest.config.ts"
   },
   "keywords": [],
   "author": "",
