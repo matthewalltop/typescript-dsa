@@ -1,30 +1,51 @@
-﻿type Key = string | number;
-export class HashTable<K extends Key, V> {
+﻿export class HashTable {
+    private _entries: [][];
     
-    constructor(private capacity: number = 100) {
-        
+    private _count: number = 0;
+    get length() {
+        return this._count;
     }
     
-    public get(key: K): V {
-        throw new Error("Not Implemented");
+    _capacity: number = 0;
+    get capacity() {
+        return this._capacity;
     }
     
-    public set(key: K,  value: V): void {
-        throw new Error("Not Implemented");
+    constructor(private size: number = 100) {
+        this._capacity = size;
+        this._entries = Array.from({length: size }, () => []);
     }
     
-    public contains(key: K): boolean {
-        throw new Error("Not Implemented");
+    public get(key: string | number): any | null {
+        const hashed = this.hash(key);
+        return this._entries[hashed] ?? null;
     }
     
+    public set(key: string | number,  value: any): void {
+        const hashed = this.hash(key);
+        if (!this._entries[hashed]) {
+            this._count += 1;
+        }
+        this._entries[hashed] = value;
+    }
     
+    public remove(key: string | number): void {
+        const hashed = this.hash(key);
+        if (!this._entries[hashed]) {
+            this._count -= 1;
+        }
+        this._entries[hashed] = [];
+    }
     
+    public contains(key: string | number): boolean {
+        const hashed = this.hash(key);
+        return this._entries[hashed] ? true : false;
+    }
     
-    
-    
-    
-    private hash(key: K): number {
-        // TODO: Be Better.
-        return 23 % this.capacity;
+    private hash(key: string | number): number {
+        let converted: number  = typeof key === 'string' ?
+            key.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
+            : key;
+        return converted % this.capacity;
     }
 }

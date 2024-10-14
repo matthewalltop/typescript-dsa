@@ -1,6 +1,5 @@
 ﻿import {describe, expect, test} from '@jest/globals';
 import {PriorityQueue} from "./priority-queue";
-import exp from "node:constants";
 
 describe('PriorityQueue', () => {
     
