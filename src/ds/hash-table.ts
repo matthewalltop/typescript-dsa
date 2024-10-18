@@ -1,19 +1,17 @@
 ﻿export class HashTable {
-    private _entries: [][];
+    private readonly _entries: [][];
     
     private _count: number = 0;
     get length() {
         return this._count;
     }
     
-    _capacity: number = 0;
     get capacity() {
         return this._capacity;
     }
     
-    constructor(private size: number = 100) {
-        this._capacity = size;
-        this._entries = Array.from({length: size }, () => []);
+    constructor(private _capacity: number = 100) {
+        this._entries = Array.from({ length: _capacity }, () => []);
     }
     
     public get(key: string | number): any | null {
@@ -23,7 +21,7 @@
     
     public set(key: string | number,  value: any): void {
         const hashed = this.hash(key);
-        if (!this._entries[hashed]) {
+        if (this._entries[hashed].length === 0) {
             this._count += 1;
         }
         this._entries[hashed] = value;
@@ -31,7 +29,7 @@
     
     public remove(key: string | number): void {
         const hashed = this.hash(key);
-        if (!this._entries[hashed]) {
+        if (this._entries[hashed].length === 0) {
             this._count -= 1;
         }
         this._entries[hashed] = [];
@@ -46,6 +44,6 @@
         let converted: number  = typeof key === 'string' ?
             key.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
             : key;
-        return converted % this.capacity;
+        return converted % this._capacity;
     }
 }
